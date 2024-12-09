@@ -1,0 +1,65 @@
+#root {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.card {
+  padding: 2em;
+}
+
+.grid {
+  margin-top: 100px;
+  margin-bottom: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 95vw;
+  overflow: hidden;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+.title {
+  font-size: 14px;
+  color: black;
+  font-weight: 600;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.price {
+  font-size: 14px;
+  color: black;
+  font-weight: 400;
+}
+
+.host {
+  color: grey;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); 
+  z-index: 1100;
+  overflow: hidden;
+}
+
+html.modalOpen,
+body.modalOpen {
+  overflow: hidden;
+  height: 100%;  
+  position: fixed;
+  width: 100%;
+}
+
+.noCategoryMessage {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 100px;
+}

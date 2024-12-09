@@ -1,0 +1,59 @@
+.headerSectionContainer {
+    width: 100%;
+    position: relative;
+    z-index: 1000;
+}
+
+.header {
+    width: 100%;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    padding: 10px 30px;
+    box-sizing: border-box;
+    position: fixed;
+    background-color: #ffffff;
+    height: 170px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.airbnbHomeButton {
+    display: flex;
+    align-items: top;
+    cursor: pointer;
+}
+
+.logoAirbnb {
+    height: 60px;
+    width: 80px;
+}
+
+.userMenusWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+
+@media (max-width: 768px) {
+    .userMenusWrapper {
+    display: none;
+}
+.logoAirbnb{
+    display: none;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    position: fixed;
+    background-color: #ffffff;
+    height: 90px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+}

@@ -1,0 +1,405 @@
+.searchBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  outline: 1px solid #d7d7d7;
+  border-radius: 50px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 851px;
+  height: 66px;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.searchBar.focused,
+.searchBar.focused .inputTextPlaceholder {
+  background-color: #ebebeb;
+}
+
+.checkInOutWrapper,
+.checkInOutExperiencesWrapper,
+.inputContainerWhoWrapper {
+  display: flex;
+}
+
+.inputContainerWhere {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 284px;
+  cursor: pointer;
+}
+.inputContainerWhere span {
+  margin-top: 1px;
+}
+.inputContainerWhere input {
+  margin-bottom: 1px;
+  font-size: 14px;
+}
+
+.inputTextPlaceholder {
+  margin-top: 2px;
+}
+
+.inputTextPlaceholder,
+.checkInText,
+.checkOutText,
+.guestsText  {
+  color: #6A6A6A;
+}
+
+.inputContainerCheckIn,
+.inputContainerCheckOut {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 140px;
+  position: relative;
+  cursor: pointer;
+}
+
+.checkInText,
+.checkOutText,
+.guestsText {
+  font-size: 14px;
+  margin-top: -1px;
+}
+
+.checkInText,
+.checkOutText {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.inputContainerWho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 284px;
+  cursor: pointer;
+}
+
+.inputContainerWhoInner{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.inputContainerWhere,
+.inputContainerCheckIn,
+.inputContainerCheckOut,
+.inputContainerWho,
+.inputContainerDate {
+  padding: 14px 24px;
+}
+
+.inputContainerDate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 281px;
+  padding-left: 25px;
+  cursor: pointer;
+}
+
+.inputContainerWhere:hover,
+.inputContainerCheckIn:hover,
+.inputContainerCheckOut:hover,
+.inputContainerWho:hover,
+.inputContainerDate:hover {
+  background-color: #efefef;
+  border-radius: 50px;
+}
+
+.searchBar.focused .inputContainerWhere:hover,
+.searchBar.focused .inputContainerCheckIn:hover,
+.searchBar.focused .inputContainerCheckOut:hover,
+.searchBar.focused .inputContainerWho:hover,
+.searchBar.focused .inputContainerDate:hover,
+.searchBar.focused .inputContainerWhere:hover .inputTextPlaceholder {
+  background-color: #ddd;
+}
+
+.searchBar.focused .inputContainerWhere.hoveredWhereBlock:hover,
+.searchBar.focused .inputContainerCheckOut.hoveredCheckOutBlock:hover,
+.searchBar.focused .inputContainerCheckIn.hoveredReversedCheckInBlock:hover,
+.searchBar.focused .inputContainerDate.hoveredReversedDateBlock:hover {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  position: relative;
+}
+
+.searchBar.focused .inputContainerWhere.hoveredWhereBlock:hover::before,
+.searchBar.focused .inputContainerCheckOut.hoveredCheckOutBlock:hover::before,
+.searchBar.focused .inputContainerCheckIn.hoveredReversedCheckInBlock:hover::before,
+.searchBar.focused .inputContainerDate.hoveredReversedDateBlock:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -30px;
+  bottom: 0;
+  left: 30px;
+  background-color: #ddd;
+  z-index: -1;
+}
+
+.searchBar.focused .inputContainerWho.hoveredWhoBlock:hover,
+.searchBar.focused .inputContainerCheckIn.hoveredCheckInBlock:hover,
+.searchBar.focused .inputContainerCheckOut.hoveredReversedCheckOutBlock:hover,
+.searchBar.focused .inputContainerDate.hoveredDateBlock:hover {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  position: relative;
+}
+
+.searchBar.focused .inputContainerWho.hoveredWhoBlock:hover::before,
+.searchBar.focused .inputContainerCheckIn.hoveredCheckInBlock:hover::before,
+.searchBar.focused .inputContainerCheckOut.hoveredReversedCheckOutBlock:hover::before,
+.searchBar.focused .inputContainerDate.hoveredDateBlock:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 30px;
+  bottom: 0;
+  left: -30px;
+  background-color: #ddd;
+  z-index: -1;
+}
+
+.searchBar.focused .inputContainerWhere.selected,
+.searchBar.focused .inputContainerCheckIn.selected,
+.searchBar.focused .inputContainerCheckOut.selected,
+.searchBar.focused .inputContainerWho.selected,
+.searchBar.focused .inputContainerDate.selected,
+.searchBar.focused .inputContainerWhere.selected .inputTextPlaceholder {
+  background-color: white;
+}
+
+.searchBar.focused .inputContainerWhere:not(.selected) input::placeholder,
+.searchBar.focused .inputContainerCheckIn:not(.selected) .checkInText,
+.searchBar.focused .inputContainerCheckOut:not(.selected) .checkOutText,
+.searchBar.focused .inputContainerWho:not(.selected) .guestsText,
+.searchBar.focused .inputContainerDate:not(.selected) .checkInText{
+  color: var(--primary);
+}
+
+.searchBar.focused .inputContainerWhere.selected,
+.searchBar.focused .inputContainerCheckIn.selected,
+.searchBar.focused .inputContainerCheckOut.selected,
+.searchBar.focused .inputContainerWho.selected,
+.searchBar.focused .inputContainerDate.selected {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.inputContainerWhere:hover input {
+  background-color: #efefef;
+}
+
+.label {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 500;
+  text-align: left;
+  border: none;
+  width: 100%;
+}
+
+.searchBar input {
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 0px 0px;
+}
+
+.separatorWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.separator {
+  width: 1px;
+  height: 30px;
+  background-color: #b5b5b5f5;
+  opacity: 0.5;
+  margin: 0;
+  padding: 4.5;
+}
+
+.circleButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 9px;
+  right: 10px; 
+  background-color: #ff385c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.circleButton:hover {
+  background-color: #e7314d;
+}
+
+.circle-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.calendarWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 76px;
+  padding: 16px 32px;
+  background-color: white;
+  z-index: 1200;
+  width: 850px;
+  width: 100%;
+  border-radius: 32px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.calendarWrapper.open {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.calendarWrapper.close {
+  opacity: 0;
+  transform: translateY(-140px);
+}
+
+.calendarExperiencesWrapper {
+  padding: 28px 30px 20px;
+}
+
+.calendarToggleWrapper {
+  padding-bottom: 10px;
+}
+
+.calendarContentWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.incrementButtonWrapper {
+  display: flex;
+  justify-self: start;
+  padding: 22px 40px 14px;
+  width: 100%;
+}
+.selected,
+.deselected {
+  border-radius: 50px;
+}
+
+.selected {
+  background-color: white; 
+}
+
+.experienceDatesWrapper{
+  display: flex;
+}
+
+.locationContentWrapper,
+.checkInTextWrapper,
+.checkOutTextWrapper,
+.dateTextWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchDeleteContentBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  outline: none;
+  padding: 0;
+  margin-right: -14px;
+}
+
+.searchDeleteContentBtn:hover {
+  background-color: #ddd;
+}
+
+.searchDeleteContentBtn:focus,
+.searchDeleteContentBtn:focus-visible {
+  outline: none;
+}
+
+.checkOutText .additionalDates {
+  font-size: 13px;
+}
+
+.whoDropdownWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 76px;
+  background-color: white;
+  z-index: 1200;
+  width: 49%;
+  border-radius: 32px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.popupContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 76px;
+  padding: 16px 32px;
+  background-color: white;
+  z-index: 1200;
+  min-width: 400px;
+  border-radius: 32px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+@media (max-width: 1200px) {
+  .calendarToggleWrapper {
+    display: none;
+  }
+}
+
+@media (max-width: 880px) {
+  .searchBar {
+    width: 751px;
+  }
+}
