@@ -6,7 +6,7 @@ import HomeIcon from "../../icons/HomeIcon";
 const MapDisplay = ({ lat, lng }) => {
   return (
     <div className={styles.mainContainer}>
-      <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || " "}>
+      <APIProvider apiKey={"AIzaSyAFNOwM0gH7GylljbJqpKsZhmorW9QkfrU" || " "}>
         <Map
           mapId="20a9930d81d7adbc"
           className={styles.mainMap}
