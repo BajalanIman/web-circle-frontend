@@ -1,19 +1,18 @@
-import styles from './ReservationCard.module.css'
-import CostsSummary from '../CostsSummary/CostsSummary'
-import AddGuestsPopUp from '../AddGuestsPopUp/AddGuestsPopUp'
-import ReservationDatesSelector from './ReservationDatesSelector/ReservationDatesSelector'
-import DatePicker from './DatePicker/DatePicker'
-import GuestCountDisplay from './GuestCountDisplay/GuestCountDisplay'
-import useOutsideClick from '../../hooks/useOutsideClick'
-import { calculateGuestCounts } from '../../utils/guestCounts'
-import { useState } from 'react'
-import axios from 'axios'
-import { useParams } from 'react-router-dom'
-import { calculateNights } from '../../utils/dateUtils'
-import Swal from 'react-sweetalert2'
-import { useNavigate } from 'react-router-dom';
-import { getSuccessHtml } from '../../utils/displayHelpers';
-
+import styles from "./ReservationCard.module.css";
+import CostsSummary from "../CostsSummary/CostsSummary";
+import AddGuestsPopUp from "../AddGuestsPopUp/AddGuestsPopUp";
+import ReservationDatesSelector from "./ReservationDatesSelector/ReservationDatesSelector";
+import DatePicker from "./DatePicker/DatePicker";
+import GuestCountDisplay from "./GuestCountDisplay/GuestCountDisplay";
+import useOutsideClick from "../../hooks/useOutsideClick";
+import { calculateGuestCounts } from "../../utils/guestCounts";
+import { useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { calculateNights } from "../../utils/dateUtils";
+import Swal from "react-sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { getSuccessHtml } from "../../utils/displayHelpers";
 
 function ReservationCard({
   toggleShortcutsPopup,
@@ -27,9 +26,8 @@ function ReservationCard({
   setCheckInDate,
   setCheckOutDate,
   booking,
-  isInitializedRef
+  isInitializedRef,
 }) {
-
   const navigate = useNavigate();
 
   const {
@@ -49,26 +47,26 @@ function ReservationCard({
 
   const [guestCounts, setGuestCounts] = useState(defaultGuestCounts || {});
   const [guestsList, setGuestsList] = useState([
-    { typeofGuest: 'Adults', numberOfGuests: 1 },
-    { typeofGuest: 'Children', numberOfGuests: 0 },
-    { typeofGuest: 'Infants', numberOfGuests: 0 },
-    { typeofGuest: 'Pets', numberOfGuests: 0 },
-  ])
-  const [successData, setSuccessData] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [successMessage, setSuccessMessage] = useState('');
+    { typeofGuest: "Adults", numberOfGuests: 1 },
+    { typeofGuest: "Children", numberOfGuests: 0 },
+    { typeofGuest: "Infants", numberOfGuests: 0 },
+    { typeofGuest: "Pets", numberOfGuests: 0 },
+  ]);
+  const [successData, setSuccessData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const { productId } = useParams();
 
   const currentTotalPeople = guestCounts.adults + guestCounts.children;
 
   const toggleShowGuests = () => {
-    setShowGuests((prevState) => !prevState)
-  }
+    setShowGuests((prevState) => !prevState);
+  };
 
   const toggleShowCalendar = (show) => {
-    setShowCalendar(show)
-  }
+    setShowCalendar(show);
+  };
 
   const {
     adultsCount,
@@ -76,7 +74,7 @@ function ReservationCard({
     infantsCount,
     petsCount,
     adultsAndChildrenCount,
-  } = calculateGuestCounts(guestsList)
+  } = calculateGuestCounts(guestsList);
 
   const handleGuestClick = (updatedGuest) => {
     setGuestsList((prevList) =>
@@ -85,30 +83,31 @@ function ReservationCard({
           ? { ...guest, numberOfGuests: updatedGuest.numberOfGuests }
           : guest
       )
-    )
-  }
+    );
+  };
 
-  const checkInOut = checkInDate && checkOutDate
+  const checkInOut = checkInDate && checkOutDate;
 
   const nights =
-  checkInDate && checkOutDate ? calculateNights(checkInDate, checkOutDate) : 0
-  const isDiscount = nights >= nightsCountForLongStayDiscount
-  const basePrice = nights * pricePerNight
+    checkInDate && checkOutDate
+      ? calculateNights(checkInDate, checkOutDate)
+      : 0;
+  const isDiscount = nights >= nightsCountForLongStayDiscount;
+  const basePrice = nights * pricePerNight;
   const totalPrice =
     basePrice +
     airbnbServiceFee +
     cleaningFee -
-    (isDiscount ? longStayDiscount : 0)
+    (isDiscount ? longStayDiscount : 0);
 
-  
   const handleFormSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
-    setSuccessMessage('')
+    e.preventDefault();
+    setError("");
+    setSuccessMessage("");
 
     if (!checkInOut || adultsCount === 0) {
-      setError('Please select valid dates and at least one adult.')
-      return
+      setError("Please select valid dates and at least one adult.");
+      return;
     }
 
     const reservationData = {
@@ -120,37 +119,37 @@ function ReservationCard({
         infants: infantsCount,
         pets: petsCount,
       },
-      totalPrice
+      totalPrice,
     };
 
     try {
       setLoading(true);
 
       const response = await axios.post(
-        (`http://localhost:8800/bookings/reservations/${productId}`),
+        `${BASE_URL}bookings/reservations/${productId}`,
         reservationData
       );
 
-      setSuccessMessage('Reservation submitted successfully!');
+      setSuccessMessage("Reservation submitted successfully!");
       setSuccessData(response.data.newBookingToClient);
     } catch (err) {
-      console.error('Error submitting reservation:', err);
-      setError('Failed to submit the reservation. Please try again later.');
+      console.error("Error submitting reservation:", err);
+      setError("Failed to submit the reservation. Please try again later.");
     } finally {
       setLoading(false);
-    }    
-  }
+    }
+  };
 
-  const closeGuestsPopup = () => setShowGuests(false)
-  const guestsRef = useOutsideClick(closeGuestsPopup)
+  const closeGuestsPopup = () => setShowGuests(false);
+  const guestsRef = useOutsideClick(closeGuestsPopup);
 
   const addGuestPopUpStyles = {
-    borderRadius: '4px',
-    width: '100% !important',
-    position: 'absolute !important',
-    border: '1px solid var(--palette-deco)',
-    zIndex: '99 !important',
-  }
+    borderRadius: "4px",
+    width: "100% !important",
+    position: "absolute !important",
+    border: "1px solid var(--palette-deco)",
+    zIndex: "99 !important",
+  };
 
   return (
     <div className={styles.reservationCard}>
@@ -161,8 +160,8 @@ function ReservationCard({
         icon="success"
         confirmButtonText="OK"
         onConfirm={() => {
-          setSuccessData(null)
-          navigate('/')
+          setSuccessData(null);
+          navigate("/");
         }}
       />
       <div className={styles.reservationSection}>
@@ -182,10 +181,7 @@ function ReservationCard({
             <h1 className={styles.soldOutGuestSection}>Booking closed</h1>
           )}
           {isBookingOpen && (
-            <div 
-              className={styles.reservationForm} 
-              ref={guestsRef}
-            >
+            <div className={styles.reservationForm} ref={guestsRef}>
               <DatePicker
                 checkInDate={checkInDate}
                 checkOutDate={checkOutDate}
@@ -241,21 +237,25 @@ function ReservationCard({
             </div>
           )}
           {isBookingOpen ? (
-          <form onSubmit={handleFormSubmit}>
-            <div className="buttonContainer">
-              <button
-                type={checkInOut && !loading ? 'submit' : 'button'}
-                onClick={
-                  !checkInOut && !loading
-                    ? () => toggleShowCalendar(true)
-                    : undefined
-                }
-                className={styles.reserveButton}
-              >
-                {loading ? 'Submitting...' : checkInOut ? 'Reserve' : 'Check availability'}
-              </button>
-            </div>
-          </form>
+            <form onSubmit={handleFormSubmit}>
+              <div className="buttonContainer">
+                <button
+                  type={checkInOut && !loading ? "submit" : "button"}
+                  onClick={
+                    !checkInOut && !loading
+                      ? () => toggleShowCalendar(true)
+                      : undefined
+                  }
+                  className={styles.reserveButton}
+                >
+                  {loading
+                    ? "Submitting..."
+                    : checkInOut
+                    ? "Reserve"
+                    : "Check availability"}
+                </button>
+              </div>
+            </form>
           ) : (
             <div className="buttonContainer">
               <button className={styles.soldOutButton} disabled>
@@ -264,7 +264,9 @@ function ReservationCard({
             </div>
           )}
           {error && <p className={styles.errorMessage}>{error}</p>}
-          {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
+          {successMessage && (
+            <p className={styles.successMessage}>{successMessage}</p>
+          )}
         </div>
         {isBookingOpen && (
           <div className={styles.noDatesMessage}>
@@ -291,7 +293,7 @@ function ReservationCard({
         />
       )}
     </div>
-  )
+  );
 }
 
-export default ReservationCard
+export default ReservationCard;

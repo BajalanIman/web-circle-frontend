@@ -1,13 +1,20 @@
 import axios from "axios";
+import { BASE_URL } from "./../constants/constants";
 
-export const fetchData = async (setLoading, setError, setPlace, setBooking, productId) => {
+export const fetchData = async (
+  setLoading,
+  setError,
+  setPlace,
+  setBooking,
+  productId
+) => {
   setLoading(true);
-  setError(null); 
+  setError(null);
 
   try {
     const [placeResponse, bookingsResponse] = await Promise.all([
-      axios.get(`http://localhost:8800/places/${productId}`), 
-      axios.get(`http://localhost:8800/bookings/${productId}`) 
+      axios.get(`${BASE_URL}places/${productId}`),
+      axios.get(`${BASE_URL}bookings/${productId}`),
     ]);
     setPlace(placeResponse.data);
     setBooking(bookingsResponse.data);
